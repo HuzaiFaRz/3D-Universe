@@ -1,41 +1,39 @@
 @import "tailwindcss";
 
-
-#webgl-canvas {
-  position: fixed;
-  top: 0;
-  left: 0.
-  width: 100vw;
-  height: 100vh;
-  z-index: 1;
+@font-face {
+  font-family: Orbitron-ExtraBold;
+  src: url(../src/assets/fonts/Orbitron-ExtraBold.ttf);
 }
 
-#planet-ui-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; /* Allows mouse clicks to pass through to Three.js canvas */
-  z-index: 2;
+@font-face {
+  font-family: Exo2-Regular;
+  src: url(../src/assets/fonts/Exo2-Regular.ttf);
 }
 
 .planet-label {
   position: absolute;
-  top: 0;
+  top: -30%;
   left: 0;
   will-change: transform; /* Optimizes performance for animation */
 }
 
 .curved-svg-text {
-  width: 180px;
-  height: 60px;
+  width: 200px;
+  height: 100px;
+  /* background-color: red; */
   overflow: visible;
 }
 
 .curved-svg-text text {
-  fill: #ffffff;
-  font-size: 24px;
-  font-weight: bold;
+  fill: antiquewhite;
+  font-family: Orbitron-ExtraBold;
+  letter-spacing: 4px;
+  display: inline-block;
+}
+
+#planet-desc-container {
+  font-family: Exo2-Regular;
   letter-spacing: 2px;
+  font-size: 1.3em;
+  text-transform: uppercase;
 }
