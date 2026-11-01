@@ -9,9 +9,9 @@
   <body>
     <div
       id="app"
-      class="w-full h-screen overflow-hidden bg-black text-white relative"
+      class="w-full h-screen overflow-hidden relative bg-black text-white"
     >
-      <nav class="w-full py-3 px-6 flex justify-between items-center">
+      <nav class="w-full py-3 px-6 flex justify-between items-center absolute">
         <span class="text-4xl">Planets</span>
         <button class="cursor-pointer size-10">
           <svg
@@ -38,55 +38,90 @@
           </svg>
         </button>
       </nav>
-      <section class="w-full">
+
+      <section class="w-full relative">
         <div
-          class="w-full h-[150px] flex flex-nowrap justify-between items-center tracking-tighter text-9xl"
+          id="planet-ui-container"
+          class="w-full h-25 flex flex-nowrap justify-between items-center tracking-tighter text-9xl absolute top-20"
         >
-          <h1 class="text-center bg-red-300">Mercury</h1>
-          <h1 class="text-center bg-red-300">venus</h1>
-          <h1 class="text-center bg-red-300">venus</h1>
-          <h1 class="text-center bg-red-300">venus</h1>
+          <div class="planet-label" id="label-mercury">
+            <svg viewBox="0 0 200 60" class="curved-svg-text">
+              <path
+                id="curve-mercury"
+                d="M 10,50 Q 100,0 190,50"
+                fill="transparent"
+              />
+              <text>
+                <textPath
+                  href="#curve-mercury"
+                  startOffset="50%"
+                  text-anchor="middle"
+                >
+                  Mercury
+                </textPath>
+              </text>
+            </svg>
+          </div>
+
+          <div class="planet-label" id="label-venus">
+            <svg viewBox="0 0 200 60" class="curved-svg-text">
+              <path
+                id="curve-venus"
+                d="M 10,50 Q 100,0 190,50"
+                fill="transparent"
+              />
+              <text>
+                <textPath
+                  href="#curve-venus"
+                  startOffset="50%"
+                  text-anchor="middle"
+                >
+                  Venus
+                </textPath>
+              </text>
+            </svg>
+          </div>
         </div>
         <div
-          class="w-full h-[150px] overflow-hidden relative tracking-tighter text-xl"
+          class="w-full h-12.5 overflow-hidden absolute top-40 tracking-tighter text-xl mt-15"
           id="planetDesc"
         >
-          <p class="absolute w-full h-full bg-blue-500">
+          <p class="absolute w-full h-full">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde
             consectetur nostrum delectus rerum recusandae vitae similique quas
             ipsam ducimus?
           </p>
-          <p class="absolute w-full h-full bg-blue-500">
+          <p class="absolute w-full h-full">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde
             consectetur nostrum delectus rerum recusandae vitae similique quas
             ipsam ducimus?
           </p>
-          <p class="absolute w-full h-full bg-blue-500">
+          <p class="absolute w-full h-full">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde
             consectetur nostrum delectus rerum recusandae vitae similique quas
             ipsam ducimus?
           </p>
-          <p class="absolute w-full h-full bg-blue-500">
+          <p class="absolute w-full h-full">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde
             consectetur nostrum delectus rerum recusandae vitae similique quas
             ipsam ducimus?
           </p>
-          <p class="absolute w-full h-full bg-blue-500">
+          <p class="absolute w-full h-full">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde
             consectetur nostrum delectus rerum recusandae vitae similique quas
             ipsam ducimus?
           </p>
-          <p class="absolute w-full h-full bg-blue-500">
+          <p class="absolute w-full h-full">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde
             consectetur nostrum delectus rerum recusandae vitae similique quas
             ipsam ducimus?
           </p>
-          <p class="absolute w-full h-full bg-blue-500">
+          <p class="absolute w-full h-full">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde
             consectetur nostrum delectus rerum recusandae vitae similique quas
             ipsam ducimus?
           </p>
-          <p class="absolute w-full h-full bg-blue-500">
+          <p class="absolute w-full h-full">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde
             consectetur nostrum delectus rerum recusandae vitae similique quas
             ipsam ducimus?

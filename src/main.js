@@ -49,6 +49,20 @@ const loadedTexture = new THREE.TextureLoader();
 // const starSphere = new THREE.Mesh(starGeometry, starMaterial);
 // scene.add(starSphere);
 
+const planets = [
+  {
+    radius: 1.5,
+    element: document.getElementById("label-mercury"),
+  },
+  { radius: 2.0, element: document.getElementById("label-venus") },
+  { radius: 2.0, element: document.getElementById("label-venus") },
+  { radius: 2.0, element: document.getElementById("label-venus") },
+  { radius: 2.0, element: document.getElementById("label-venus") },
+  { radius: 2.0, element: document.getElementById("label-venus") },
+  { radius: 2.0, element: document.getElementById("label-venus") },
+  { radius: 2.0, element: document.getElementById("label-venus") },
+];
+
 const spheres = new THREE.Group();
 for (let index = 0; index < 8; index++) {
   // const sphereTexture = loadedTexture.load(textures[index]);
@@ -62,6 +76,7 @@ for (let index = 0; index < 8; index++) {
   const geometry = new THREE.SphereGeometry(radius, segments, segments);
   const sphere = new THREE.Mesh(geometry, material);
 
+  planets[index].mesh = sphere;
   const angle = (index / 8) * (Math.PI * 2);
 
   sphere.position.x = oribitRadius * Math.cos(angle);
@@ -74,7 +89,7 @@ let lastWheelTime = 0;
 let wheelCount = 0;
 let isAnimating = false;
 
-const planetsName = document.querySelector("#planetDesc").querySelectorAll('*')
+const planetsName = document.querySelector("#planetDesc").querySelectorAll("*");
 
 planetsName.forEach((heading, ind) => {
   gsap.set(heading, {
@@ -121,7 +136,7 @@ const planetsAnimation = (event) => {
 window.addEventListener("wheel", planetsAnimation);
 
 spheres.rotation.x = 0.1;
-spheres.position.y = -0.6;
+spheres.position.y = -0.9;
 // spheres.rotation.y = -0.0
 scene.add(spheres);
 
@@ -134,21 +149,40 @@ const responsive = () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 };
-
 responsive();
 
 window.addEventListener("resize", responsive);
 
 // const controls = new OrbitControls(camera, renderer.domElement);
-
 // controls.update();
 
+const tempVector = new THREE.Vector3();
+
 const animate = () => {
+  window.requestAnimationFrame(animate);
   // spheres.rotation.y += 0.01;
   // starSphere.position.x += 0.005;
   // controls.update();
 
+  planets.forEach((planet) => {
+    // 1. Rotate the planet sphere
+    planet.mesh.rotation.y += 0.01;
+
+    // 2. Get the 3D world position of the planet center and offset to its top edge (radius)
+    planet.mesh.getWorldPosition(tempVector);
+    tempVector.y += planet.radius;
+
+    // 3. Project the 3D vector to 2D normalized device coordinates (NDC)
+    tempVector.project(camera);
+
+    // 4. Convert NDC (-1 to +1) to screen pixel coordinates
+    const x = (tempVector.x * 0.5 + 0.5) * window.innerWidth;
+    const y = (tempVector.y * -0.5 + 0.5) * window.innerHeight;
+
+    // 5. Apply CSS transform to make the HTML/SVG text stick to the sphere's top position
+    planet.element.style.transform = `translate(-50%, -100%) translate(${x}px, ${y}px)`;
+  });
+
   renderer.render(scene, camera);
-  window.requestAnimationFrame(animate);
 };
 animate();

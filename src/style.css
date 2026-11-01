@@ -1,7 +1,41 @@
 @import "tailwindcss";
 
 
+#webgl-canvas {
+  position: fixed;
+  top: 0;
+  left: 0.
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
 
-.ddd{
+#planet-ui-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Allows mouse clicks to pass through to Three.js canvas */
+  z-index: 2;
+}
 
+.planet-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform; /* Optimizes performance for animation */
+}
+
+.curved-svg-text {
+  width: 180px;
+  height: 60px;
+  overflow: visible;
+}
+
+.curved-svg-text text {
+  fill: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 2px;
 }
