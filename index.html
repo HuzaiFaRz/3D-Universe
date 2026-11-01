@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>earth</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <div
+      id="app"
+      class="w-full h-screen overflow-hidden bg-black text-white relative"
+    >
+      <nav class="w-full py-3 px-6 flex justify-between items-center">
+        <span class="text-4xl">Planets</span>
+        <button class="cursor-pointer size-10">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-logs preview-icon"
+          >
+            <path d="M3 5h1" />
+            <path d="M3 12h1" />
+            <path d="M3 19h1" />
+            <path d="M8 5h1" />
+            <path d="M8 12h1" />
+            <path d="M8 19h1" />
+            <path d="M13 5h8" />
+            <path d="M13 12h8" />
+            <path d="M13 19h8" />
+          </svg>
+        </button>
+      </nav>
+      <section class="w-full">
+        <div
+          class="w-full h-[150px] flex flex-nowrap justify-between items-center tracking-tighter text-9xl"
+        >
+          <h1 class="text-center bg-red-300">Mercury</h1>
+          <h1 class="text-center bg-red-300">venus</h1>
+          <h1 class="text-center bg-red-300">venus</h1>
+          <h1 class="text-center bg-red-300">venus</h1>
+        </div>
+        <div
+          class="w-full h-[150px] overflow-hidden relative tracking-tighter text-xl"
+          id="planetDesc"
+        >
+          <p class="absolute w-full h-full bg-blue-500">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde
+            consectetur nostrum delectus rerum recusandae vitae similique quas
+            ipsam ducimus?
+          </p>
+          <p class="absolute w-full h-full bg-blue-500">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde
+            consectetur nostrum delectus rerum recusandae vitae similique quas
+            ipsam ducimus?
+          </p>
+          <p class="absolute w-full h-full bg-blue-500">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde
+            consectetur nostrum delectus rerum recusandae vitae similique quas
+            ipsam ducimus?
+          </p>
+          <p class="absolute w-full h-full bg-blue-500">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde
+            consectetur nostrum delectus rerum recusandae vitae similique quas
+            ipsam ducimus?
+          </p>
+          <p class="absolute w-full h-full bg-blue-500">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde
+            consectetur nostrum delectus rerum recusandae vitae similique quas
+            ipsam ducimus?
+          </p>
+          <p class="absolute w-full h-full bg-blue-500">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde
+            consectetur nostrum delectus rerum recusandae vitae similique quas
+            ipsam ducimus?
+          </p>
+          <p class="absolute w-full h-full bg-blue-500">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde
+            consectetur nostrum delectus rerum recusandae vitae similique quas
+            ipsam ducimus?
+          </p>
+          <p class="absolute w-full h-full bg-blue-500">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde
+            consectetur nostrum delectus rerum recusandae vitae similique quas
+            ipsam ducimus?
+          </p>
+        </div>
+      </section>
+      <canvas id="canvas"></canvas>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
