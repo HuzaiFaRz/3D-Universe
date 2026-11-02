@@ -2,25 +2,29 @@
 
 @font-face {
   font-family: Orbitron-ExtraBold;
-  src: url(../src/assets/fonts/Orbitron-ExtraBold.ttf);
+  src: url(/fonts/Orbitron-ExtraBold.ttf);
+}
+
+@font-face {
+  font-family: Orbitron-Regular;
+  src: url(/fonts/Orbitron-Regular.ttf);
 }
 
 @font-face {
   font-family: Exo2-Regular;
-  src: url(../src/assets/fonts/Exo2-Regular.ttf);
+  src: url(/fonts/Exo2-Light.ttf);
 }
 
 .planet-label {
   position: absolute;
-  top: -30%;
+  top: -20%;
   left: 0;
-  will-change: transform; /* Optimizes performance for animation */
+  will-change: transform;
 }
 
 .curved-svg-text {
   width: 200px;
   height: 100px;
-  /* background-color: red; */
   overflow: visible;
 }
 
@@ -34,6 +38,10 @@
 #planet-desc-container {
   font-family: Exo2-Regular;
   letter-spacing: 2px;
-  font-size: 1.3em;
   text-transform: uppercase;
+}
+
+.logo {
+  font-family: Orbitron-Regular;
+  letter-spacing: 10px;
 }

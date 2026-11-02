@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/Addons.js";
 import { HDRLoader } from "three/addons/loaders/HDRLoader.js";
 import gsap from "gsap";
 
@@ -29,15 +28,16 @@ const segments = 64;
 const oribitRadius = 7;
 
 const textures = [
-  "./src/assets/planets/mercury.jpg",
-  "./src/assets/planets/venus.jpg",
-  "./src/assets/planets/earth.jpg",
-  "./src/assets/planets/mars.jpg",
-  "./src/assets/planets/jupiter.jpg",
-  "./src/assets/planets/saturn.jpg",
-  "./src/assets/planets/uranus.jpg",
-  "./src/assets/planets/neptune.jpg",
+  "/textures/mercury.jpg",
+  "/textures/venus.jpg",
+  "/textures/earth.jpg",
+  "/textures/mars.jpg",
+  "/textures/jupiter.jpg",
+  "/textures/saturn.jpg",
+  "/textures/uranus.jpg",
+  "/textures/neptune.jpg",
 ];
+
 const loadedTexture = new THREE.TextureLoader();
 
 const planets = [
@@ -115,6 +115,8 @@ planets.forEach((elem, ind) => {
   planetDescP.classList.add("absolute");
   planetDescP.classList.add("w-full");
   planetDescP.classList.add("h-full");
+  planetDescP.classList.add("left-0");
+  planetDescP.classList.add("p-2");
   planetDescP.innerHTML = elem.desc;
 
   planetDescContainer.append(planetDescP);
@@ -123,23 +125,23 @@ planets.forEach((elem, ind) => {
   planetsNamesData[ind].element = planetLabel;
 });
 
-// const starTexture = new THREE.TextureLoader().load("./src/assets/stars.jpg");
-// const starGeometry = new THREE.SphereGeometry(50, 64, 64);
-// const starMaterial = new THREE.MeshBasicMaterial({
-//   map: starTexture,
-//   side: THREE.BackSide,
-// });
-// const starSphere = new THREE.Mesh(starGeometry, starMaterial);
-// scene.add(starSphere);
+const starTexture = new THREE.TextureLoader().load("/textures/stars.jpg");
+const starGeometry = new THREE.SphereGeometry(50, 64, 64);
+const starMaterial = new THREE.MeshBasicMaterial({
+  map: starTexture,
+  side: THREE.BackSide,
+});
+const starSphere = new THREE.Mesh(starGeometry, starMaterial);
+scene.add(starSphere);
 
 const spheres = new THREE.Group();
 for (let index = 0; index < 8; index++) {
-  // const sphereTexture = loadedTexture.load(textures[index]);
-  // sphereTexture.colorSpace = THREE.SRGBColorSpace;
+  const sphereTexture = loadedTexture.load(textures[index]);
+  sphereTexture.colorSpace = THREE.SRGBColorSpace;
 
   const material = new THREE.MeshStandardMaterial({
-    // map: sphereTexture,
-    color: "black",
+    map: sphereTexture,
+    // color: "black",
   });
 
   const geometry = new THREE.SphereGeometry(radius, segments, segments);
@@ -175,8 +177,21 @@ const planetsAnimation = (event) => {
     lastWheelTime = currentTime;
     if (isAnimating) return;
     isAnimating = true;
-    wheelCount = (wheelCount + 1) % 8;
+
     const direction = event.deltaY > 0 ? -1 : 1;
+
+    if (direction === -1) {
+      wheelCount++;
+      if (wheelCount >= 8) {
+        wheelCount = 0;
+      }
+    } else {
+      wheelCount--;
+      if (wheelCount <= 0) {
+        wheelCount = 7;
+      }
+    }
+
     planetsDesc.forEach((heading, ind) => {
       const currentY = gsap.getProperty(heading, "yPercent");
       gsap.to(heading, {
@@ -205,21 +220,21 @@ const planetsAnimation = (event) => {
   }
 };
 
-const svgSetting = (ind = 0) => {
+const svgSetting = (ind) => {
   planetsNamesData.forEach((e, i) => {
     if (i === ind) {
       gsap.to(svgs[i], {
         opacity: 1,
-        transform: "scaleX(1)",
-        fontSize: "4em",
+        fontSize: "7vw",
         duration: 1,
+        filter: "blur(0px)",
         delay: 0.2,
         ease: "power1.inOut",
       });
     } else {
       gsap.to(svgs[i], {
         opacity: 0.3,
-        transform: "scaleX(-1)",
+        filter: "blur(1px)",
         fontSize: "1em",
         delay: 0.6,
         ease: "power1.inOut",
@@ -228,13 +243,7 @@ const svgSetting = (ind = 0) => {
   });
 };
 
-svgSetting();
-
-// planetsNamesData.forEach((e, i) => {
-//   svgs[i].style.opacity = i > 0 ? 0.5 : 1;
-//   svgs[i].style.transform = i > 0 ? "scaleX(-1)" : null;
-//   svgs[i].style.fontSize = i > 0 ? "0.6em" : "3em";
-// });
+svgSetting(0);
 
 window.addEventListener("wheel", planetsAnimation);
 
@@ -258,38 +267,23 @@ responsive();
 
 window.addEventListener("resize", responsive);
 
-// const controls = new OrbitControls(camera, renderer.domElement);
-// controls.update();
-
 const tempVector = new THREE.Vector3();
 
 const planetNameRotation = () => {
   planetsNamesData.forEach((planet) => {
-    // 1. Rotate the planet sphere
-    // planet.mesh.rotation.y += 0.01;
-
-    // 2. Get the 3D world position of the planet center and offset to its top edge (radius)
     planet.mesh.getWorldPosition(tempVector);
+    planet.mesh.rotation.y += 0.0006;
     tempVector.y += planet.radius;
-
-    // 3. Project the 3D vector to 2D normalized device coordinates (NDC)
     tempVector.project(camera);
-
-    // 4. Convert NDC (-1 to +1) to screen pixel coordinates
     const x = (tempVector.x * 0.5 + 0.5) * window.innerWidth;
     const y = (tempVector.y * -0.5 + 0.5) * window.innerHeight;
-
-    // 5. Apply CSS transform to make the HTML/SVG text stick to the sphere's top position
     planet.element.style.transform = `translate(-50%, -100%) translate(${x}px, ${y}px)`;
   });
 };
 
 const animate = () => {
   window.requestAnimationFrame(animate);
-  // spheres.rotation.y += 0.01;
-  // starSphere.position.x += 0.005;
-  // controls.update();
-
+  starSphere.position.x += 0.01;
   planetNameRotation();
   renderer.render(scene, camera);
 };
