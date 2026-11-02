@@ -2,17 +2,17 @@
 
 @font-face {
   font-family: Orbitron-ExtraBold;
-  src: url(/fonts/Orbitron-ExtraBold.ttf);
+  src: url(../public/fonts/Orbitron-ExtraBold.ttf);
 }
 
 @font-face {
   font-family: Orbitron-Regular;
-  src: url(/fonts/Orbitron-Regular.ttf);
+  src: url(../public/fonts/Orbitron-Regular.ttf);
 }
 
 @font-face {
   font-family: Exo2-Regular;
-  src: url(/fonts/Exo2-Light.ttf);
+  src: url(../public/fonts/Exo2-Regular.ttf);
 }
 
 body {
