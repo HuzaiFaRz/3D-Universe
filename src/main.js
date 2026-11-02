@@ -246,6 +246,7 @@ const svgSetting = (ind) => {
 svgSetting(0);
 
 window.addEventListener("wheel", planetsAnimation);
+window.addEventListener("touchmove", planetsAnimation);
 
 spheres.rotation.x = 0.1;
 spheres.position.y = -0.9;

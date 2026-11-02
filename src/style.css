@@ -15,6 +15,10 @@
   src: url(/fonts/Exo2-Light.ttf);
 }
 
+body {
+  overflow: hidden !important;
+}
+
 .planet-label {
   position: absolute;
   top: -20%;
