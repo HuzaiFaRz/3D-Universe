@@ -182,14 +182,14 @@ const planetsAnimation = (event) => {
 
     if (direction === -1) {
       wheelCount++;
-      if (wheelCount >= 8) {
+      if (wheelCount === 8) {
         wheelCount = 0;
       }
     } else {
-      wheelCount--;
-      if (wheelCount <= 0) {
-        wheelCount = 7;
+      if (wheelCount === 0) {
+        wheelCount = 8;
       }
+      wheelCount--;
     }
 
     planetsDesc.forEach((heading, ind) => {
