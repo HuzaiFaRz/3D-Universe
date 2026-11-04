@@ -170,6 +170,7 @@ planetsDesc.forEach((heading, ind) => {
   });
 });
 const svgs = document.querySelectorAll(".curved-svg-text");
+
 const planetsAnimation = (event) => {
   if (!planetsDesc) return;
   const currentTime = Date.now();
@@ -178,7 +179,7 @@ const planetsAnimation = (event) => {
     if (isAnimating) return;
     isAnimating = true;
 
-    const direction = event.deltaY > 0 ? -1 : 1;
+    const direction = event > 0 ? 1 : -1;
 
     if (direction === -1) {
       wheelCount++;
@@ -211,7 +212,7 @@ const planetsAnimation = (event) => {
     });
 
     gsap.to(spheres.rotation, {
-      y: event.deltaY > 0 ? `+=${(Math.PI * 2) / 8}` : `-=${(Math.PI * 2) / 8}`,
+      y: direction === -1 ? `+=${(Math.PI * 2) / 8}` : `-=${(Math.PI * 2) / 8}`,
       duration: 1,
       ease: "power1.inOut",
     });
@@ -245,8 +246,21 @@ const svgSetting = (ind) => {
 
 svgSetting(0);
 
-window.addEventListener("wheel", planetsAnimation);
-window.addEventListener("touchmove", planetsAnimation);
+window.addEventListener("wheel", (event) => {
+  planetsAnimation(event.deltaY);
+});
+
+let startY = 0;
+
+window.addEventListener("touchstart", (event) => {
+  startY = event.touches[0].clientY;
+});
+
+window.addEventListener("touchmove", (event) => {
+  const currentY = event.touches[0].clientY;
+  const deltaY = currentY - startY;
+  planetsAnimation(deltaY);
+});
 
 spheres.rotation.x = 0.1;
 spheres.position.y = -0.9;
