@@ -171,7 +171,7 @@ planetsDesc.forEach((heading, ind) => {
 });
 const svgs = document.querySelectorAll(".curved-svg-text");
 
-const planetsAnimation = (event) => {
+const planetsAnimation = (event, isTouch) => {
   if (!planetsDesc) return;
   const currentTime = Date.now();
   if (currentTime - lastWheelTime >= wheelTime) {
@@ -179,7 +179,7 @@ const planetsAnimation = (event) => {
     if (isAnimating) return;
     isAnimating = true;
 
-    const direction = event > 0 ? 1 : -1;
+    const direction = event > 0 ? (isTouch ? 1 : -1) : isTouch ? -1 : 1;
 
     if (direction === -1) {
       wheelCount++;
@@ -246,20 +246,23 @@ const svgSetting = (ind) => {
 
 svgSetting(0);
 
-window.addEventListener("wheel", (event) => {
-  planetsAnimation(event.deltaY);
-});
-
 let startY = 0;
+let isTouch = false;
+
+window.addEventListener("wheel", (event) => {
+  isTouch = false;
+  planetsAnimation(event.deltaY, isTouch);
+});
 
 window.addEventListener("touchstart", (event) => {
   startY = event.touches[0].clientY;
+  isTouch = true;
 });
 
 window.addEventListener("touchmove", (event) => {
   const currentY = event.touches[0].clientY;
   const deltaY = currentY - startY;
-  planetsAnimation(deltaY);
+  planetsAnimation(deltaY, isTouch);
 });
 
 spheres.rotation.x = 0.1;
